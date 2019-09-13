@@ -175,14 +175,14 @@ void setup()
   digitalWrite(MUX_1, LOW);
   digitalWrite(BT_VCC, HIGH);
   digitalWrite(BT_GND, LOW);
-  /*
+  
     mcp3553_setup();
     dac1.begin(0x60);
     dac2.begin(0x61);
     bme.begin();
     set_sv(DEFAULT_SV);
     set_hv(DEFAULT_HV);
-  */
+  
 }
 
 void loop()
@@ -200,24 +200,23 @@ void loop()
     switch (data_packet[0])
     {
       case READ:
-        /*
         temp = bme.readTemperature();
         pres = bme.readPressure() / 100.0F;
         rh = bme.readHumidity();
         adc = mcp3553_avg();
-        */
-        BTSerial.print("adc");
+        
+        BTSerial.print(adc);
         BTSerial.print(",");
-        BTSerial.print("temp");
+        BTSerial.print(temp);
         BTSerial.print(",");
-        BTSerial.print("rh");
+        BTSerial.println(rh);
         Serial.println("data");
         break;
       case SET_SV:
-        BTSerial.println("set sv");
+        BTSerial.println("sv");
         break;
       case SET_HV:
-        BTSerial.println("set hv");
+        BTSerial.println("hv");
         break;
     }
   }
