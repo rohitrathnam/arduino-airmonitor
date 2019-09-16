@@ -53,11 +53,11 @@ float mcp3553_single_read()
     data[2] = SPI.transfer(0xff);
     data[3] = SPI.transfer(0xaa);
     val = 3.3 * (data[0] * 0x10000 + data[1] * 0x100 + data[2]) / 0x200000;
-    Serial.print(data[0], HEX);
-    Serial.print("\t");
-    Serial.print(data[1], HEX);
-    Serial.print("\t");
-    Serial.println(data[2], HEX);
+    //Serial.print(data[0], HEX);
+    //Serial.print("\t");
+    //Serial.print(data[1], HEX);
+    //Serial.print("\t");
+    //Serial.println(data[2], HEX);
 
   }
   if (val > 3 and mux != 3)
@@ -148,7 +148,7 @@ void set_hv(float hv)
     for (int i = hval; i <= x; i++)
     {
       dac1.setVoltage(i, false);
-      delay(1);
+      delay(2);
     }
   }
   else if (x < hval)
@@ -156,7 +156,7 @@ void set_hv(float hv)
     for (int i = hval; i >= x; i--)
     {
       dac1.setVoltage(i, false);
-      delay(1);
+      delay(2);
     }
   }
   hval = x;
@@ -206,11 +206,11 @@ void loop()
         adc = mcp3553_avg();
         
         BTSerial.print(adc);
-        BTSerial.print(",");
+        BTSerial.print(" ");
         BTSerial.print(temp);
-        BTSerial.print(",");
+        BTSerial.print(" ");
         BTSerial.println(rh);
-        Serial.println("data");
+        //Serial.println("data");
         break;
       case SET_SV:
         set_sv(data_packet[1]/10.0);
